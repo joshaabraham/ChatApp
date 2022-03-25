@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Account.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Renderer="clr-namespace:ChatApp.Controls"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label
+                    Margin="0,0,15,0"
+                    FontSize="22"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource titleBarText}"
+                    Text="Login Account"
+                    VerticalOptions="CenterAndExpand" />
+            <Image
+                    Margin="0,0,15,0"
+                    HorizontalOptions="End"
+                    Source="icon_plus_white.png">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <Label
+                        Margin="0,20,0,0"
+                        FontAttributes="None"
+                        FontFamily="Lobster-Regular"
+                        FontSize="30"
+                        HorizontalOptions="Center"
+                        Text="Welcome to Chat"
+                        TextColor="#777" />
+                    <Label
+                        Margin="0,0,0,0"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="Use your credentials to login"
+                        TextColor="#777" />
+                </StackLayout>
+
+                <StackLayout
+                    Margin="20,50,20,0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand">
+                    <input:AdvancedEntry
+                        x:Name="iName"
+                        BorderColor="#D9DCDB"
+                        CornerRadius="22"
+                        IconImage="icon_user.png"
+                        IconColor="#EE7162"
+                        Placeholder="Username"
+                        Text="{Binding User.Username}"
+                        TextColor="Black"
+                        TextFontSize="18" />
+                    <input:AdvancedEntry
+                        Margin="0,15,0,0"
+                        BorderColor="#D9DCDB"
+                        CornerRadius="22"
+                        IconImage="icon_lock.png"
+                        IconColor="#EE7162"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Text="{Binding User.Password}"
+                        TextColor="Black"
+                        TextFontSize="18" />
+
+                    <StackLayout Margin="5,0" Orientation="Horizontal">
+
+                        <input:CheckBox Text="Stay Signed in" Type="Material" />
+
+                        <Label
+                            Margin="0,10,0,0"
+                            FontSize="16"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Forgot password?"
+                            TextColor="#00a8ff">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
+
+                    </StackLayout>
+
+                    <Renderer:GradientButton
+                        Margin="0,30,0,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding LoginCommand}"
+                        CornerRadius="22"
+                        EndColor="#731282"
+                        FontSize="18"
+                        GradientColorOrientation="Horizontal"
+                        StartColor="#0517a1"
+                        Text="Sign In"
+                        TextColor="White" />
+
+                    <Label
+                        Margin="0,5,0,0"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        Text="Not a registered member?"
+                        TextColor="#999" />
+
+                    <BoxView
+                        Margin="5,5,5,10"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Button
+                        Margin="0,5,0,0"
+                        BackgroundColor="#3B5999"
+                        Command="{Binding RegisterCommand}"
+                        CornerRadius="22"
+                        FontAttributes="None"
+                        FontSize="18"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Register Account"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Chat.ChatUserListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:ChatApp.Converters"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label
+                Margin="0,0,15,0"
+                FontSize="22"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource titleBarText}"
+                Text="Chat User List"
+                VerticalOptions="CenterAndExpand" />
+            <Image
+                Margin="0,0,15,0"
+                HorizontalOptions="End"
+                Source="icon_search_white.png" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:OnlineStatusColorConverter x:Key="OnlineStatus" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ListView
+                x:Name="lvChatUserList"
+                BackgroundColor="#fff"
+                HasUnevenRows="True"
+                ItemsSource="{Binding ChatUserList}"
+                SeparatorColor="#fff"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="0" Padding="0,8,0,8">
+
+                                <StackLayout
+                                    Padding="15,5,15,5"
+                                    BackgroundColor="#fff"
+                                    Orientation="Horizontal">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectCommand, Source={x:Reference lvChatUserList}}" CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+
+                                    <ffimage:CachedImage
+                                        Aspect="AspectFill"
+                                        DownsampleToViewSize="true"
+                                        HeightRequest="70"
+                                        HorizontalOptions="Start"
+                                        Source="{Binding PhotoPath}"
+                                        WidthRequest="70">
+                                        <ffimage:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation BorderHexColor="#444444" BorderSize="3" />
+                                        </ffimage:CachedImage.Transformations>
+                                    </ffimage:CachedImage>
+
+                                    <StackLayout Margin="10,0,2,10" HorizontalOptions="FillAndExpand">
+                                        <StackLayout>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                HorizontalOptions="Start"
+                                                Text="{Binding Name}"
+                                                TextColor="#555"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                Margin="0"
+                                                FontSize="17"
+                                                Text="{Binding Location}"
+                                                TextColor="#444" />
+
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <Frame
+                                        Padding="3"
+                                        BackgroundColor="{Binding IsOnline, Converter={StaticResource OnlineStatus}}"
+                                        CornerRadius="10"
+                                        HeightRequest="7"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        WidthRequest="7" />
+
+                                </StackLayout>
+
+                                <BoxView
+                                    BackgroundColor="#dcdcdc"
+                                    HeightRequest="1"
+                                    HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

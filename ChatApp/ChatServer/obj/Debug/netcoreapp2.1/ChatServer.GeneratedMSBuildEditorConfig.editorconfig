@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = ChatServer
+build_property.ProjectDir = E:\c_sharp_projets\xamarin_chat_app\ChatApp\ChatApp\ChatServer\

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage
+    x:Class="ChatApp.Views.Menu.MenuPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:CircleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu" IconImageSource="icon_menu.png">
+            <StackLayout>
+                <StackLayout
+                    Margin="0"
+                    Padding="10,20,10,10"
+                    BackgroundColor="#F4F6F8"
+                    Spacing="0">
+
+                    <CircleImage:CircleImage
+                        Aspect="AspectFill"
+                        BorderColor="#444444"
+                        BorderThickness="1"
+                        HeightRequest="120"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="male2.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="120" />
+
+                    <Label
+                        Margin="0,5,0,0"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="{Binding Name}"
+                        TextColor="#444" />
+                    <Label
+                        Margin="0,0,0,5"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        Text="{Binding Location}"
+                        TextColor="#444" />
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout Padding="10,10,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_home.png" />
+                        <Label
+                            Margin="10,0,0,0"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Home"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <BoxView
+                        Margin="0,2,0,2"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Padding="10,0,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_interest.png" />
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Interest"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <BoxView
+                        Margin="0,2,0,2"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Padding="10,0,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_bell.png" />
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Activities"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <BoxView
+                        Margin="0,2,0,2"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Padding="10,0,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_user.png" />
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="My Profile"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <BoxView
+                        Margin="0,2,0,2"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Padding="10,0,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_about.png" />
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="About Us"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <BoxView
+                        Margin="0,2,0,2"
+                        BackgroundColor="#dcdcdc"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Padding="10,0,0,5" Orientation="Horizontal">
+                        <Image HorizontalOptions="End" Source="icon_terms.png" />
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Terms And Conditions"
+                            TextColor="#444">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail />
+
+</MasterDetailPage>

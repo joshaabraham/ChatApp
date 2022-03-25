@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Chat.ChatPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:CircleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:converters="clr-namespace:ChatApp.Converters"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    x:Name="chatPage"
+    Title="Chatting"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#F8F8F8">
+
+    <NavigationPage.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <CircleImage:CircleImage
+                BorderColor="#fff"
+                BorderThickness="1"
+                HeightRequest="40"
+                Source="male2.png"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="40" />
+            <Label
+                Margin="5,10"
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="{Binding PairName}"
+                TextColor="#fff" />
+            <Image
+                Margin="0,0,5,0"
+                HorizontalOptions="EndAndExpand"
+                Source="icon_home_white.png">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoHomeCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <ListView
+                x:Name="lvChat"
+                Margin="{OnPlatform Android='10,0,10,0',
+                                    iOS='10,0,10,0'}"
+                BackgroundColor="#F8F8F8"
+                FlowDirection="RightToLeft"
+                HasUnevenRows="True"
+                ItemsSource="{Binding ChatMessageList}"
+                SeparatorVisibility="None"
+                VerticalOptions="End">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid IsVisible="{Binding IsSystemMessage}">
+                                    <Label
+                                        Margin="20,5"
+                                        FontSize="16"
+                                        HorizontalOptions="CenterAndExpand"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Message}"
+                                        TextColor="#969daf" />
+                                </Grid>
+                                <Grid IsVisible="{Binding IsSystemMessage, Converter={StaticResource InverseBool}}">
+                                    <Grid IsVisible="{Binding IsOwnMessage, Converter={StaticResource InverseBool}}" RowSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <CircleImage:CircleImage
+                                            Grid.Column="1"
+                                            Aspect="AspectFill"
+                                            BorderColor="#777"
+                                            BorderThickness="1"
+                                            HeightRequest="50"
+                                            HorizontalOptions="End"
+                                            Source="male2.png"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="50" />
+
+                                        <Grid
+                                            Grid.Row="0"
+                                            Grid.ColumnSpan="2"
+                                            Margin="50,5,0,5"
+                                            Padding="10"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="FillAndExpand">
+
+                                            <Frame
+                                                Margin="0,5,0,0"
+                                                Padding="5"
+                                                BackgroundColor="#EBE7F6"
+                                                CornerRadius="5"
+                                                HasShadow="True"
+                                                HorizontalOptions="FillAndExpand">
+
+                                                <StackLayout>
+                                                    <Label
+                                                        Margin="10,5,10,0"
+                                                        FontSize="14"
+                                                        HorizontalTextAlignment="Start"
+                                                        LineBreakMode="CharacterWrap"
+                                                        Text="{Binding Message}"
+                                                        TextColor="#444"
+                                                        VerticalOptions="FillAndExpand" />
+                                                    <Label
+                                                        Margin="10,0,10,5"
+                                                        FontSize="13"
+                                                        LineBreakMode="CharacterWrap"
+                                                        Text="{Binding ActionTime}"
+                                                        TextColor="#777"
+                                                        VerticalOptions="FillAndExpand" />
+                                                </StackLayout>
+
+                                            </Frame>
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid IsVisible="{Binding IsOwnMessage}" RowSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <CircleImage:CircleImage
+                                            BorderColor="#777"
+                                            BorderThickness="1"
+                                            HeightRequest="50"
+                                            HorizontalOptions="Start"
+                                            Source="photo.png"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="50" />
+
+                                        <Grid
+                                            Grid.Row="0"
+                                            Grid.ColumnSpan="2"
+                                            Margin="5,5,50,0"
+                                            Padding="10"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="FillAndExpand">
+
+                                            <Frame
+                                                Margin="0,5,0,0"
+                                                Padding="5"
+                                                BackgroundColor="#fff"
+                                                CornerRadius="5"
+                                                HasShadow="True"
+                                                HorizontalOptions="FillAndExpand">
+                                                <StackLayout>
+                                                    <Label
+                                                        Margin="10,5,10,0"
+                                                        FontSize="14"
+                                                        HorizontalTextAlignment="Start"
+                                                        LineBreakMode="CharacterWrap"
+                                                        Text="{Binding Message}"
+                                                        TextColor="#444"
+                                                        VerticalOptions="FillAndExpand" />
+                                                    <Label
+                                                        Margin="10,0,10,5"
+                                                        FontSize="13"
+                                                        LineBreakMode="CharacterWrap"
+                                                        Text="{Binding ActionTime}"
+                                                        TextColor="#777"
+                                                        VerticalOptions="FillAndExpand" />
+                                                </StackLayout>
+                                            </Frame>
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout
+                Margin="0"
+                Padding="10,5,5,5"
+                BackgroundColor="AliceBlue"
+                IsVisible="{Binding ShowTyping}"
+                Spacing="0"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Italic"
+                    FontSize="15"
+                    Text="{Binding TypingText}"
+                    TextColor="Black" />
+            </StackLayout>
+
+            <Frame
+                Padding="0,1,0,0"
+                BackgroundColor="#F6F7F9"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End">
+
+                <StackLayout
+                    Margin="0"
+                    Padding="10,15,10,15"
+                    Spacing="0">
+
+                    <StackLayout Orientation="Horizontal">
+                        <input:AdvancedEntry
+                            Padding="5"
+                            BorderColor="#dcdcdc"
+                            HorizontalOptions="FillAndExpand"
+                            IconImage="chat.png"
+                            Placeholder="Type Message"
+                            PlaceholderColor="#969daf"
+                            Text="{Binding SendingMessage}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand">
+                            <input:AdvancedEntry.Behaviors>
+                                <b:EventToCommandBehavior Command="{Binding TextChangedCommand}" EventName="TextChanged" />
+                            </input:AdvancedEntry.Behaviors>
+                        </input:AdvancedEntry>
+
+                        <ImageButton
+                            Command="{Binding SendMessageCommand}"
+                            HeightRequest="45"
+                            HorizontalOptions="Center"
+                            Source="icon_send.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="45" />
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>
